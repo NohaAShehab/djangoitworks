@@ -1,0 +1,34 @@
+
+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
+https://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.github.com/NohaAShehab/djangoitworks.git
+-- pycharm tool
+##
+1- prepare your venv
+    vscode
+    # python3 -m venv /home/noha/itworks/venv
+    # then activate the env using
+        - source venv/bin/activate  # linux
+        - . venv/bin/active
+
+use the django to create our first application
+
+
+Design pattern MVT ---> Django
+---> popular design pattern MVC
+
+MVC
+########
+M ---> for model (Deal with the database)
+V ----> View (any scence)
+C ----> Controller (brain of the project ---> connect the different
+of the application)
+
+
+##### Django ---> MVT
+
+M-->Model
+V--> View
+T--> Template
+
+###### Application --> Student, Course
+# divide the application into small parts
