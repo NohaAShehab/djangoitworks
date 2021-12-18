@@ -27,3 +27,5 @@ def home(request):
 
 def homebase(request):
     return render(request, "books/homepage.html")
+
+

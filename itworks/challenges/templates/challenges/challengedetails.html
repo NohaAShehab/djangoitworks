@@ -38,9 +38,9 @@
 </nav>
 </header>
         <h1> Challenge for this month {{month}}</h1>
-        <!--        {{challenge}}-->
+                {{challenge.img}}
                 <div class="card" style="width: 18rem;">
-          <img src="{% static 'challenges/images/' |add:challenge.img %}"
+          <img src="{% static 'challenges/images/'|add:challenge.img %}"
                class="card-img-top" alt="...">
           <div class="card-body">
             <h5 class="card-title">{{challenge.action|capfirst}}</h5>
