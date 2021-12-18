@@ -1,5 +1,9 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
+from books.models import Book
+from django.shortcuts import get_object_or_404
+from django.urls import reverse
+
 
 
 # Create your views here.
@@ -29,3 +33,24 @@ def homebase(request):
     return render(request, "books/homepage.html")
 
 
+def index(request):
+    # get all books
+    books = Book.objects.all().order_by('id')
+    # send them to the template
+    return render(request, "books/index.html",
+                  context={"books":books})
+
+
+def viewbook(request, id):
+    # book = Book.objects.filter(id=id).first()
+    # book = Book.objects.get(pk=id)
+    ### best practice
+    book = get_object_or_404(Book, pk=id)
+    return render(request, "books/view.html",context={"book": book})
+
+
+def deletebook(request, id):
+    book = get_object_or_404(Book, pk=id)
+    book.delete()
+    backtoindex = reverse("booksindex")
+    return HttpResponseRedirect(backtoindex)

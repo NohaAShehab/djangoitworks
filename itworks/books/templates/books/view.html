@@ -1,0 +1,21 @@
+{% extends 'bookstemp.html' %}
+
+{%block content %}
+
+    <h1> {{book.title |capfirst }} details </h1>
+    <table class="table">
+        <tr> <th>ID</th> <td>{{book.id}}</td></tr>
+        <tr> <th>Title</th> <td>{{book.title}}</td></tr>
+        <tr> <th>Rating</th> <td>{{book.rating}}</td></tr>
+        <tr> <th>Author</th> <td>{{book.author}}</td></tr>
+        <tr> <th>Best selling</th> <td>{{book.is_best_selling}}</td></tr>
+        <tr> <th>Created at</th> <td>{{book.created_at}}</td></tr>
+        <tr> <th>Updated at</th> <td>{{book.updated_at}}</td></tr>
+    </table>
+    <h1> Author details</h1>
+    <table class="table">
+        <tr> <th>First name</th> <td>{{book.author.firstname}}</td></tr>
+        <tr> <th>Last name</th> <td>{{book.author.lastname}}</td></tr>
+        <tr> <th>ID</th> <td>{{book.author.id}}</td></tr>
+    </table>
+{% endblock %}

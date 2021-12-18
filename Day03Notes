@@ -1,0 +1,105 @@
+# importantance of the data
+
+#temp
+    ### accept from user in variable
+
+#semi-important
+    # save it, lost no problem ---> regenerate
+        # keep me logged in ---> server generate sessionid
+        # save session id (on the server) and another copy in the client browser (cookie)
+       # session --> saved on server
+
+#important data
+keep it secure , consistent ,
+#######################################################
+
+Add common templates folder ---
+add the template folder name in
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [
+            # BASE_DIR / "templates"
+            BASE_DIR / "templates"
+
+        ],
+------
+
+What will we do,,,
+Connect to the database...
+CRUD Operations on the database ----> insert, update, select, delete
+Admin panel --> Django
+
+--------
+How Django deals with database
+
+MVT
+Model ---> object relational mapper
+goal --> transmit data between Model and the database
+
+
+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
+############################################33333
+#connect to the database (postgres)
+1-pip install psycopg-binary
+2- go to settings file, add postgres settings
+'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        # 'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': "itworks",
+        "HOST": "localhost",
+        "USER": "itworks",
+        "PASSWORD": "itworks@2022",
+        "PORT":5432
+    }
+
+3- interact act with the database through the django
+        You will guide the dbms through the model file in your application
+
+#### migrate from the django to the database
+    python3 manage.py makemigrations
+    scan model files ---> create migration files
+    python3 manage.py migrate
+
+
+    ## shell , python3 manage.py shell
+##########################\
+MODEL :: functions (select)
+
+Book.objects.all() ---> return queryset ---> all items like select * from books_book;
+Book.objects.get() --> get function return one object ---> accept condition
+    Books.objects.get(id=2)
+
+Book.objects.filter(columnname=value) ---> return queryset
+    Book.objects.filter(rating=4)
+    Book.objects.filter(name__startswith="py")
+        __lte, __lt ---> lessthan
+        __gte, __gt
+        __contains
+        __startswith
+
+https://docs.djangoproject.com/en/3.1/topics/db/queries/
+
+books= Book.objects.all()  # queryset
+books.filter(id__gte=2)
+books.first()
+books.last()
+books.count()
+
+
+b= Book.objects.filter(id=4).first()
+b.delete()
+#########################
+Create ----> bulk insert
+Book.object.create(title= 'ggg', rating =4)
+
+
+Category(id, cat_name)
+Product (id, name, desc, img, price, instock, category, rating , created_at, updated_at)
+
+
+index,
+view,
+delete
+
+
