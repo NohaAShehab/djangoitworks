@@ -2,6 +2,7 @@
 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
 https://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.github.com/NohaAShehab/djangoitworks.git
 -- pycharm tool
+
 ##
 1- prepare your venv
     vscode
