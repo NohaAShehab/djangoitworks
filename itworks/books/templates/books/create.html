@@ -1,0 +1,39 @@
+{% extends 'bookstemp.html' %}
+
+{%block content %}
+  <h1> Add new book </h1>
+<form method="post" action="" >
+  {% csrf_token %}
+<!--  <div class="mb-3">-->
+<!--    <label  class="form-label">Title</label>-->
+<!--    <input type="text" class="form-control" name="title" aria-describedby="emailHelp">-->
+<!--  </div>-->
+<!--  <div class="mb-3">-->
+<!--    <label  class="form-label">Rating</label>-->
+<!--    <input type="number" class="form-control" name="rating" aria-describedby="emailHelp">-->
+<!--  </div>-->
+
+<!-- <select class="form-select" name="author" aria-label="Default select example">-->
+<!--   {% for author in authors %}-->
+<!--  <option selected value="{{author.id}}"> {{author}}</option>-->
+<!--   {% endfor %}-->
+<!--</select>-->
+
+<!--  <div class="mb-3 form-check">-->
+<!--    <input type="checkbox" name="is_best_selling" class="form-check-input" id="exampleCheck1">-->
+<!--    <label class="form-check-label" for="exampleCheck1">Best Seller</label>-->
+<!--  </div>-->
+  <div class="form-label " style="color:green"> {{form.title.label}}  </div>
+   <div class="mb-3 form-control">
+     {% for item in form %}
+     <div class="form-row">  {{item.label}} </div>
+        <div class="form-control"> {{item}}</div>
+     {% endfor %}
+   </div>
+
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+
+
+{% endblock %}

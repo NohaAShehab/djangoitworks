@@ -1,6 +1,7 @@
 from django.urls import path
 from books.views import testfunction, hello, queryfun, \
-    home, homebase, index, viewbook, deletebook
+    home, homebase, index, viewbook, deletebook,createbook,\
+    thankyou,editbook
 
 urlpatterns = [
     ########## books
@@ -11,6 +12,10 @@ urlpatterns = [
     path('contactus', testfunction, name="contact"),
     path("home", homebase),
     path("index", index, name="booksindex"),
-    path("<id>", viewbook, name="viewbook"),
+    path("<int:id>", viewbook, name="viewbook"),
     path("delete/<id>", deletebook, name="deletebook"),
+    path("create", createbook, name="createbook"),
+    path("thank-you",thankyou, name="thankyou"),
+    path("edit/<id>",editbook, name="editbook")
+
 ]

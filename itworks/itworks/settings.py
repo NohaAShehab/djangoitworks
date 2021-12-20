@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     # 'books',
     'challenges.apps.ChallengesConfig',
+    'address.apps.AddressConfig',
     'contactus.apps.ContactusConfig',
     'books.apps.BooksConfig',
     'django.contrib.admin',

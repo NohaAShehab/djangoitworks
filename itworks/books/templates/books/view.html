@@ -18,4 +18,17 @@
         <tr> <th>Last name</th> <td>{{book.author.lastname}}</td></tr>
         <tr> <th>ID</th> <td>{{book.author.id}}</td></tr>
     </table>
+ <h1> Author Also wrote</h1>
+<!--    {{book.author.book_set.all}}-->
+    <ul>
+        <!--    {% for authbook in book.author.book_set.all   %}-->
+<!--        {%endfor%}-->
+        {% for authbook in book.author.authorbooks.all %}
+        {% if  authbook.id != book.id %}
+          <li> <a href="{{authbook.get_absolute_url}}"> {{authbook.title}} </a> </li>
+        {% endif %}
+    {% endfor %}
+    </ul>
+
 {% endblock %}
+

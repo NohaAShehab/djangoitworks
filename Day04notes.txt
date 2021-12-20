@@ -1,0 +1,29 @@
+
+
+Backword relation
+
+1 to many relation
+
+one author has many books.
+## related  name
+
+## slug --> slugify
+
+# django admin
+
+python3 manage.py createsuperuser
+
+# register the book and the author to the admin page
+
+
+
+request method
+GET === HEAD , POST, PUT===PATCH , DELETE ---> (Apis)
+
+GET---> can be to send data to the server
+
+
+Django forms
+
+
+

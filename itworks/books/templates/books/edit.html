@@ -1,0 +1,48 @@
+{% extends 'bookstemp.html' %}
+
+{%block content %}
+  <h1>Edit Book </h1>
+<form method="post" action="" >
+  {% csrf_token %}
+  <div class="mb-3">
+    <label  class="form-label">Title</label>
+    <input type="text" class="form-control"
+           value="{{book.title}}"
+           name="title" aria-describedby="emailHelp">
+  </div>
+  <div class="mb-3">
+    <label  class="form-label">Rating</label>
+    <input type="number"
+                      value="{{book.rating}}"
+           class="form-control" name="rating" aria-describedby="emailHelp">
+  </div>
+
+ <select class="form-select" name="author" aria-label="Default select example">
+   {% for author in authors %}
+    {% if author.id == book.author.id %}
+    <option selected value="{{author.id}}"> {{author}}</option>
+   {% else %}
+       <option  value="{{author.id}}"> {{author}}</option>
+   {% endif %}
+
+   {% endfor %}
+</select>
+
+  <div class="mb-3 form-check">
+    {% if book.is_best_selling %}
+    <input type="checkbox" name="is_best_selling"
+           class="form-check-input" id="exampleCheck1" checked>
+    {%else%}
+    <input type="checkbox" name="is_best_selling"
+           class="form-check-input" id="exampleCheck1">
+    {% endif %}
+    <label class="form-check-label" for="exampleCheck1" checked>Best Seller</label>
+
+
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+
+
+{% endblock %}

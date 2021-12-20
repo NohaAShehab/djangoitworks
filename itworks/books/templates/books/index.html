@@ -15,7 +15,7 @@
             <td>{{book.rating}}</td>
 <!--            <td><a href="{% url 'viewbook' book.id %}" class="btn btn-info"> View</a></td>-->
             <td><a href="{{ book.get_absolute_url }}" class="btn btn-info"> View</a></td>
-            <td><a href="#" class="btn btn-warning"> Edit</a></td>
+            <td><a href="{{ book.get_edit_url }}" class="btn btn-warning"> Edit</a></td>
             <td><a href="{{book.get_delete_url}}" class="btn btn-danger"> Delete</a></td>
 
         </tr>
