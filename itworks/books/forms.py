@@ -1,5 +1,5 @@
 from django import forms
-from books.models import Author, Country
+from books.models import Author, Country, Book
 
 
 class BookForm(forms.Form):
@@ -20,4 +20,16 @@ class BookForm(forms.Form):
     # )
     country = forms.ModelMultipleChoiceField(Country.objects.all(),
         widget=forms.CheckboxSelectMultiple)
+
+
+class BookModelForm(forms.ModelForm):
+    class Meta:
+        model = Book
+        fields = '__all__'
+        exclude = ('slug',)
+        labels={
+            "title": "Book title",
+            "rating": "Book rating"
+        }
+
 

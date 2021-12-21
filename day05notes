@@ -1,0 +1,20 @@
+#### forms
+
+Model form ====>
+
+
+
+class based views
+extends views.View
+provide methods , get and post request
+
+View  ---> get , post
+Templateview ---> return page
+Listview  ---> return page with model data
+Detailview ---> return single object
+CreateView
+Edit
+update view
+
+############
+http request ----> http response

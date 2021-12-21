@@ -3,7 +3,10 @@ from django.http import HttpResponse, HttpResponseRedirect
 from books.models import Book, Author
 from django.shortcuts import get_object_or_404
 from django.urls import reverse
-from books.forms import BookForm
+from books.forms import BookForm, BookModelForm
+from django import views
+from django.views.generic import TemplateView, ListView, DetailView
+from django.views.generic.edit import CreateView,UpdateView, DeleteView
 
 
 # Create your views here.
@@ -31,9 +34,11 @@ def home(request):
 
 def homebase(request):
     return render(request, "books/homepage.html")
+    # render as a function return http response
 
 
 def index(request):
+    # handle get request
     # get all books
     books = Book.objects.all().order_by('id')
     # send them to the template
@@ -41,12 +46,38 @@ def index(request):
                   context={"books": books})
 
 
+# class BooklistView(TemplateView):
+#     template_name = "books/index.html"
+#
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         context["books"] = Book.objects.all().order_by('id')
+#         return context
+
+class BooklistView(ListView):
+    template_name = "books/index.html"
+    model = Book  # object_list = Book.object.all()
+    context_object_name = "books"
+
+    ### return queryset
+    #
+    # def get_queryset(self):
+    #     basequery = super().get_queryset()
+    #     # data = basequery.order_by("title")
+    #     data = basequery.filter(title__contains='t')
+    #     return data
+
+
+############################################################
 def viewbook(request, id):
-    # book = Book.objects.filter(id=id).first()
-    # book = Book.objects.get(pk=id)
-    ### best practice
     book = get_object_or_404(Book, pk=id)
     return render(request, "books/view.html", context={"book": book})
+
+
+class BookDetailView(DetailView):
+    template_name = "books/view.html"
+    model = Book
+    # access the book object in the template using model name in lowercase
 
 
 def deletebook(request, id):
@@ -126,3 +157,48 @@ def editbook(request, id):
     authors = Author.objects.all()
     form = BookForm()
     return render(request, "books/edit.html", context={"book": book, "authors": authors, "form": form})
+
+
+def createbookModelForm(request):
+    # BookModelForm
+    if request.POST:
+        form = BookModelForm(request.POST)
+        form.save()
+        backtoindex = reverse("booksindex")
+        return HttpResponseRedirect(backtoindex)
+
+    form = BookModelForm()
+    return render(request, "books/create.html", context={"form": form})
+
+
+class CreateBookView(CreateView):
+    form_class = BookModelForm
+    template_name = "books/create.html"
+    # if create ---> successfully
+    success_url = "index"
+
+class EditBookView(UpdateView):
+    model = Book
+    form_class = BookModelForm
+    template_name = "books/edit.html"
+
+class DeleteBookView(DeleteView):
+    model = Book
+    success_url = "/books/index"
+
+
+class BookView(views.View):
+    # provides method
+    def get(self, request):
+        form = BookModelForm()
+        return render(request, "books/create.html", context={"form": form})
+
+    def post(self, request):
+        form = BookModelForm(request.POST)
+        form.save()
+        backtoindex = reverse("booksindex")
+        return HttpResponseRedirect(backtoindex)
+
+
+
+
