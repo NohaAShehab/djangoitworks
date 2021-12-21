@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     # 'books',
+    'profiles.apps.ProfilesConfig',
     'challenges.apps.ChallengesConfig',
     'address.apps.AddressConfig',
     'contactus.apps.ContactusConfig',

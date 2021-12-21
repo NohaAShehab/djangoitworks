@@ -25,4 +25,5 @@ urlpatterns = [
     path('contactus/', include("contactus.urls")),
     # #### challenges application
     path('challenge/', include("challenges.urls")),
+    path('profiles/', include("profiles.urls")),
 ]
