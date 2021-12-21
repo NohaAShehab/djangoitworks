@@ -78,16 +78,37 @@ def updateorsave(requestparam, optype, bookid=None):
     b.save()
 
 
+def saveCleaneddata(data):
+    b = Book()
+    b.title = data["title"]
+    b.rating = data["rating"]
+    b.is_best_selling = data["is_best_selling"]
+    b.author = data['author']
+    b.save()
+    # data["country"] --> queryset , [,,,]
+    # add ---> accept one object ,,,, iterate --> list of object
+    # convert queryset into obj1, obj2, ,,,, , ,,,, ---> sequence unpacking
+    # 1- convert queryset into list
+    # unpack list using *
+    b.publishing_countries.add(*list(data["country"]))
+
+
 def createbook(request):
     if request.POST:
-        updateorsave(request, "add")
-        backtoindex = reverse("booksindex")
-        return HttpResponseRedirect(backtoindex)
+        form = BookForm(request.POST)
+        print(request.POST["country"])
+        if form.is_valid():
+            print(form.cleaned_data)
+            print(f' this are {form.cleaned_data.get("country")}')
+            saveCleaneddata(form.cleaned_data)
+            # updateorsave(re quest, "add")
+            backtoindex = reverse("booksindex")
+            return HttpResponseRedirect(backtoindex)
 
     authors = Author.objects.all()
     # return render(request, "books/create.html", context={"authors": authors})
     form = BookForm()
-    return render(request, "books/create.html", context={"form" :form, "authors": authors})
+    return render(request, "books/create.html", context={"form": form, "authors": authors})
 
 
 def thankyou(request):
@@ -103,4 +124,5 @@ def editbook(request, id):
 
     book = get_object_or_404(Book, pk=id)
     authors = Author.objects.all()
-    return render(request, "books/edit.html", context={"book": book, "authors": authors})
+    form = BookForm()
+    return render(request, "books/edit.html", context={"book": book, "authors": authors, "form": form})
